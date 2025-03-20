@@ -8,13 +8,18 @@ const Character = ({animation}) => {
   const { nodes, materials, animations } = useGLTF("/cool_man.glb");
   const { actions } = useAnimations(animations, group);
 
-  console.log(actions);
-
   useEffect(() => {
-    actions[animation].reset().fadeIn(0.5).play();
-
-    return ()=>{actions[animation].fadeOut(0.5);}
-  }, [animation]);
+    console.log("Available actions:", actions);
+    const selectedAnimation = actions[animation];
+    if (selectedAnimation) {
+      selectedAnimation.reset().fadeIn(0.5).play();
+      return () => {
+        selectedAnimation.fadeOut(0.5);
+      };
+    } else {
+      console.error(`Animation "${animation}" not found in actions.`);
+    }
+  }, [animation, actions]);
   return (
     <group ref={group} dispose={null}>
       <group name="Sketchfab_Scene">

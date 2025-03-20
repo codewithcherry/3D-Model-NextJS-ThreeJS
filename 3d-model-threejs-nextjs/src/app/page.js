@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Canvas } from "@react-three/fiber";
 import Character from "../../components/Character";
 import { OrbitControls } from "@react-three/drei";
@@ -21,6 +21,10 @@ export default function Home() {
   const changeAnimation = (animation) => {
     setActiveAnimation(animation);
   };
+
+  useEffect(()=>{
+    setActiveAnimation('salute');
+  },[])
 
   return (
     <div className="h-[100vh]">
